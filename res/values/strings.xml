@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">WikiPatroller</string>
+
+    <!-- Login activity -->
+    <!-- Labels -->
+    <string name="loginTitle">WikiPatroller</string>
+    <string name="wikiPrompt">Wiki:</string>
+    <string name="usernamePrompt">Username:</string>
+    <string name="passwordPrompt">Password:</string>
+    <string name="loginButtonLabel">Login</string>
+    <!-- Messages -->
+    <string name="defaultWiki">en.wikipedia.org</string>
+    <string name="noDomain">Please enter a Wiki</string>
+    <string name="noUsername">Please enter a username</string>
+    <string name="noPassword">Please enter a password</string>
+    <!-- Login errors -->
+    <string name="invalid">Illegal username</string>
+    <string name="missing">No such user</string>
+    <string name="blocked">That account is blocked!</string>
+    <string name="rollback">You need to have rollback rights to use this app</string>
+    <string name="wrongpass">Incorrect password</string>
+    <string name="throttled">You\'ve been temporarily locked out</string>
+    <string name="ioError">Unable to establish valid connection</string>
+    <string name="unknownLogin">Oops! Something went wrong while logging in!</string>
+
+    <!-- Patrol activity -->
+    <!-- Labels -->
+    <string name="patrol_activity_title">Patrol</string>
+    <string name="loadingString">Loading…</string>
+    <string name="revertButtonLabel">Rollback</string>
+    <string name="revertVandalButtonLabel">Rollback vandal</string>
+    <string name="nextButtonLabel">Next</string>
+    <!-- Menu items -->
+    <string name="action_settings">Settings</string>
+    <string name="action_logout">Logout</string>
+    <!-- Messages -->
+    <string name="reallyLogout">Are you sure you want to logout?</string>
+    <string name="rcFetchError">Unable to fetch recent changes</string>
+    <!-- Revert dialog -->
+    <string name="revertDialogTitle">Rollback?</string>
+    <string name="revertReasonHint">Rollback reason</string>
+    <!-- Revert messages -->
+    <string name="toolate">This edit is not the most recent</string>
+    <string name="alreadyRolled">Someone else already reverted this edit</string>
+    <string name="noChange">Reverting this edit would no change the page</string>
+    <!-- <string name="editConflict">Edit conflict detected — revert canceled!\nPage: %s</string> -->
+    <string name="onlyAuthor">Revert canceled — "%s" only has one author</string>
+    <string name="unknownRevert">Oops! Something went wrong while reverting that edit!\nPage %s</string>
+    <string name="reverted">Successfully reverted edit(s) to \"%s\"</string>
+
+    <!-- Settings -->
+    <string name="settings_activity_title">Settings</string>
+    <string name="pref_anonOnlyTitle">Show anonymous edits only</string>
+    <string name="pref_anonOnlySummary">Don\'t show edits made by logged-in users</string>
+
+</resources>

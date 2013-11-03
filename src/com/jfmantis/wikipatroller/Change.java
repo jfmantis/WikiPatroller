@@ -3,6 +3,13 @@ package com.jfmantis.wikipatroller;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Represents one edit
+ * 
+ * Contains all the information returned about an edit by querying the recent
+ * changes list. Also stores the previous user and the diff, which are computed
+ * by the Wiki class in fetchRecentChanges().
+ */
 public class Change {
 	private String user, title, summary, time, prevUser;
 	private long revid, oldrevid, pageid;

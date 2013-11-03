@@ -42,7 +42,8 @@ public class PatrolActivity extends Activity {
 	Set<Long> changesSeen;
 	Change current;
 
-	boolean juststarted = true; // whether the activity just started
+	// whether the activity has just started (i.e., still says "Loading...")
+	boolean juststarted = true;
 
 	ScheduledExecutorService threadPool;
 
@@ -82,6 +83,7 @@ public class PatrolActivity extends Activity {
 	@Override
 	protected void onStart() {
 		super.onStart();
+
 		PreferenceManager.setDefaultValues(this, wiki.getUser(), 0, R.xml.preferences, false);
 		SharedPreferences prefs = getSharedPreferences(wiki.getUser(), 0);
 		boolean anonsOnly = prefs.getBoolean("pref_anonOnly", true);
@@ -286,11 +288,12 @@ public class PatrolActivity extends Activity {
 			if (changeQueue.size() > 0) {
 				nextButton.setEnabled(true);
 			} else {
-				fetchRecentChanges(); // try again
+				// should probably wait a bit before trying again
+				fetchRecentChanges();
 			}
 
-			// if this is the first time fetching recent changes, enable buttons
-			// and show the edit
+			// if the activity has not shown any changes before, then enable
+			// buttons and show the edit
 			if (juststarted) {
 				juststarted = false;
 				rvButton.setEnabled(true);

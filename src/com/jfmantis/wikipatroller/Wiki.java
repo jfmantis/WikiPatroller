@@ -31,9 +31,12 @@ import android.text.style.BackgroundColorSpan;
 
 public class Wiki implements Serializable {
 
-	// Generally, these error enums are used for errors that would happen during
-	// normal operation -- wrong password, edit conflict, etc. Real errors, like
-	// connection and parsing problems, are dealt with through exceptions.
+	/*
+	 * These error enums are used for errors that would happen during normal
+	 * operation and don't have anything to do with Java -- wrong password, edit
+	 * conflict, etc. Real errors, like connection and parsing problems, are
+	 * dealt with through exceptions.
+	 */
 
 	enum LoginError {
 		INVALID, MISSING, BLOCKED, ROLLBACK, WRONGPASS, THROTTLED, UNKNOWN, IOERROR
@@ -67,6 +70,8 @@ public class Wiki implements Serializable {
 		return anonsonly;
 	}
 
+	// set whether fetchRecentChanges() should only retrieve edits made by
+	// anonymous users
 	public void setAnonsOnly(boolean b) {
 		anonsonly = b;
 	}
@@ -91,6 +96,7 @@ public class Wiki implements Serializable {
 		return makeArticleURL("User:" + name);
 	}
 
+	// doesn't *really* log out
 	public synchronized void logout() {
 		loggedin = false;
 		RequestBuilder.clearCookies();
@@ -157,6 +163,7 @@ public class Wiki implements Serializable {
 			}
 		}
 
+		// list of all the revisions whose content is needed
 		long[] revids = new long[changes.size() * 2];
 		for (int i = 0; i < changes.size(); i++) {
 			revids[i * 2 + 0] = changes.get(i).getRevid();
@@ -298,9 +305,9 @@ public class Wiki implements Serializable {
 	}
 
 	private String makeSummary(String user, String reason, String prevUser) {
-		String myPage = " (using [[User:Jfmantis/WikiPatroller|WikiPatroller]])";
 		String summaryFmt = "Reverted edit(s) by [[Special:Contributions/%s|%s]] ([[User_talk:%s|talk]])";
 		String summary = String.format(summaryFmt, user, user, user);
+		String myPage = " (using [[User:Jfmantis/WikiPatroller|WikiPatroller]])";
 
 		if (reason.length() > 0) {
 			summary += ": " + reason;
@@ -308,6 +315,8 @@ public class Wiki implements Serializable {
 			summary += " to last revision";
 		}
 
+		// add link to wikipatroller page if there's room in the edit summary
+		// (IPv6 users take up a lot of space)
 		if (summary.length() + myPage.length() < 250) {
 			summary += myPage;
 		}
@@ -321,7 +330,7 @@ public class Wiki implements Serializable {
 		LinkedList<diff_match_patch.Diff> diffs = differ.diff_main(before, after);
 		differ.diff_cleanupSemantic(diffs);
 		differ.diff_cleanupSemantic(diffs);
-		
+
 		int pos = 0;
 		for (int i = 0; i < diffs.size(); i++) {
 			diff_match_patch.Diff d = diffs.get(i);
@@ -363,7 +372,9 @@ public class Wiki implements Serializable {
 	}
 }
 
-/*
+/**
+ * 
+ * 
  * Helper class for building GET and POST requests with many parameters. There
  * are a lot of variables that are the same for every request that this
  * application makes, so there are a lot of static variables, but except for all

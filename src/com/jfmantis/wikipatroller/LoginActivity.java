@@ -81,6 +81,7 @@ public class LoginActivity extends Activity {
 		Wiki wiki;
 
 		protected void onPreExecute() {
+			// disable all controls while trying to log in
 			wikiDomain.setEnabled(false);
 			usernameInput.setEnabled(false);
 			passwordInput.setEnabled(false);
